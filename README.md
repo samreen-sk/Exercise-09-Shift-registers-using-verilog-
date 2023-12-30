@@ -41,39 +41,95 @@ FIGURE-04
 A Parallel in Parallel out (PIPO) shift register is used as a temporary storage device and like SISO Shift register it acts as a delay element.
 
 ### Procedure
-/* write all the steps invloved */
+
+# 1
+Use quartus software and import required modules.
+# 2
+Assign inputs and outputs for shift registers.
+# 3
+Assign logic for input to give output at positive edge.
+# 4
+Perform opertaions and produce rtl circuit.
+# 5
+End module.
 
 
+## Program 1:
+```
 
-### PROGRAM 
-/*
-Program for  Implementation-of Shift-registers-using-verilog-
-Developed by: 
-RegisterNumber:  
-*/
+module SIPO(c,si,po);
+input c,si;
+output [7:0] po;
+reg [7:0] temp;
+always @ (posedge c)
+begin
+temp = {temp[6:0],si};
+end
+assign po = temp;
+endmodule
 
-
-
-
-
+```
 
 ### RTL LOGIC  REGISTERS   
 
-
-
-
-
-
-
+![172343226-35e7994d-fd15-474b-8ad3-d0b5951361d7](https://github.com/samreen-sk/Exercise-09-Shift-registers-using-verilog-/assets/149347632/6a7ed159-ed47-4dea-994b-6cd77e1ad170)
 
 
 ### TIMING DIGRAMS FOR SHIFT REGISTERS
 
+![172343477-d655b5aa-1425-4a76-bca7-0de2ab5bc82f](https://github.com/samreen-sk/Exercise-09-Shift-registers-using-verilog-/assets/149347632/68146566-6c8d-4667-985a-14ca514dfef8)
 
 
+## program 2:
 
+```
+mmodule PISO(Clk,Pin,load,so);
+input load,Clk;
+input [3:0] Pin;
+output reg so;
+reg [3:0] temp;
+always @ (posedge Clk)
+begin 
+if(load)
+temp <= Pin;
+else
+begin
+so<=temp[3];
+temp <={temp[2:0],1'b0};
+end
+end
+endmodule
 
+```
 
+### RTL LOGIC REGISTERS:
 
+![201101903-d0bc6010-1a46-4616-bcd9-4f36ad0bbc1c](https://github.com/samreen-sk/Exercise-09-Shift-registers-using-verilog-/assets/149347632/2862065a-fdc7-42a2-b48d-0e8110013433)
+
+### TIMING DIGRAMS FOR SHIFT REGISTERS:
+
+![201103309-82b8f143-8301-486c-a86b-a21bd5a5408c](https://github.com/samreen-sk/Exercise-09-Shift-registers-using-verilog-/assets/149347632/52d1e70a-8298-443f-947a-8307afd87fa1)
+
+## program 3:
+```
+module PIPO (Po,Pi,clk);
+input clk;
+input[3:0] Pi;
+output reg[3:0] Po;
+always@(posedge clk)
+begin
+Po=Pi;
+end 
+endmodule
+```
+
+### RLT LOGIC REGISTERS:
+
+![201100899-974ad5ff-f6dc-4052-9b78-9a1a778e7daf](https://github.com/samreen-sk/Exercise-09-Shift-registers-using-verilog-/assets/149347632/f3cb4b52-38b6-4336-a068-c2a2c7a53c04)
+
+### TIMINGS DIAGRAMS FOR SHIFT REGISTERS:
+
+![201100957-c0671c2d-bccc-4a58-9b7e-2e9cd1e35607](https://github.com/samreen-sk/Exercise-09-Shift-registers-using-verilog-/assets/149347632/41b5e602-57e7-4b88-93d6-76422d35468f)
 
 ### RESULTS 
+Thus the program to implement shift registers is done successful.
